@@ -1,0 +1,41 @@
+$darkModeElem: hsl(209, 23%, 22%);
+$darkModeBg: hsl(207, 26%, 17%);
+$lightModeTxt: hsl(200, 15%, 8%);
+$lightModeInput: hsl(0, 0%, 52%);
+$lightModeBg: hsl(0, 0%, 98%);
+$white: hsl(0, 0%, 100%);
+
+* {
+	box-sizing: border-box;
+	font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+	background-color: $lightModeBg;
+	color: $lightModeTxt;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 80px;
+	padding: 0 3rem;
+	box-shadow: 1px 1px 5px -1px $lightModeInput;
+	h2 {
+		font-size: 24px;
+		font-weight: 800;
+	}
+	p {
+		font-weight: 600;
+		cursor: pointer;
+		span {
+			margin-right: 0.5rem;
+		}
+	}
+}

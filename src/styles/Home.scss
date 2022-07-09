@@ -1,0 +1,48 @@
+$darkModeElem: hsl(209, 23%, 22%);
+$darkModeBg: hsl(207, 26%, 17%);
+$lightModeTxt: hsl(200, 15%, 8%);
+$lightModeInput: hsl(0, 0%, 52%);
+$lightModeBg: hsl(0, 0%, 98%);
+$white: hsl(0, 0%, 100%);
+
+* {
+	box-sizing: border-box;
+	font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+	background-color: $lightModeBg;
+	color: $lightModeTxt;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.countries-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	justify-items: center;
+	gap: 3rem;
+	margin: 0 6rem;
+	margin-top: 2rem;
+}
+
+@media screen and (max-width: 1250px) {
+	.countries-container {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (max-width: 950px) {
+	.countries-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.countries-container {
+		grid-template-columns: 1fr;
+	}
+}
