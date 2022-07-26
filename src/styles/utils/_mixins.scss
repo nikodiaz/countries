@@ -1,0 +1,21 @@
+@mixin flexible($dis, $dir, $cut, $just, $align) {
+	display: $dis;
+	flex-flow: $dir $cut;
+	justify-content: $just;
+	align-items: $align;
+}
+
+@mixin grid($dis, $col, $space) {
+	display: $dis;
+	grid-template-columns: repeat($col, 1fr);
+	gap: $space;
+	@media screen and (max-width: 1250px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media screen and (max-width: 900px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media screen and (max-width: 600px) {
+		grid-template-columns: 1fr;
+	}
+}

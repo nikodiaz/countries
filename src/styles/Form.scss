@@ -1,76 +1,109 @@
-$darkModeElem: hsl(209, 23%, 22%);
-$darkModeBg:hsl(207, 26%, 17%);
-$lightModeTxt:hsl(200, 15%, 8%);
-$lightModeInput:hsl(0, 0%, 52%);
-$lightModeBg:hsl(0, 0%, 98%);
-$white:hsl(0, 0%, 100%);
-
-* {
-    box-sizing: border-box;
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-body {
-    background-color: $lightModeBg;
-    color: $lightModeTxt;
-}
+@use './utils/_vars';
+@use './utils/_mixins';
 
 .form-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1.5rem;
-    margin-top: 2rem;
-    .searchInput {
-        text-align: left;
-        width: 35%;
-        padding: 1rem;
-        margin: 0 4.5rem;
-        font-size: 1rem;
-        color: $lightModeInput;
-        background-color: $white;
-        border-radius: 6px;
-        box-shadow: 1px 1px 3px -2px $lightModeInput;
-        span{
-            margin-right: .5rem;
-        }
-        input{
-            width: 90%;
-            border: none;
-            outline: none;
-        }
-    }
-    .form-filter-container{
-        position: relative;
-        display: flex;
-        margin-right: 4.5rem;
-        .form-filter {
-            width: 200px;
-            padding: 1rem;
-            background-color: $white;
-            border: none;
-            border-radius: 6px;
-            box-shadow: 1px 1px 3px -2px $lightModeInput;
-            outline: none;
-            -moz-appearance:none; /* Firefox */
-            -webkit-appearance:none; /* Safari and Chrome */
-            appearance:none;
-        }
-        .select-arrow {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-        }
-    }
+	@include mixins.flexible(flex, row, wrap, space-between, center);
+	width: 90vw;
+	margin: 0 auto;
+	padding-top: 7rem;
+	.searchInput {
+		text-align: left;
+		width: 35%;
+		padding: 1rem;
+		font-size: 1rem;
+		color: vars.$light-mode-input;
+		background-color: vars.$white;
+		border-radius: 6px;
+		box-shadow: 1px 1px 3px -2px vars.$light-mode-input;
+		transition: all ease-in-out 0.2s;
+		span {
+			margin-right: 0.5rem;
+		}
+		input {
+			width: 90%;
+			border: none;
+			outline: none;
+			transition: all ease-in-out 0.2s;
+		}
+	}
+	.form-filter-container {
+		display: flex;
+		position: relative;
+		.form-filter {
+			width: 200px;
+			padding: 1rem;
+			background-color: vars.$white;
+			border: none;
+			border-radius: 6px;
+			box-shadow: 1px 1px 3px -2px vars.$light-mode-input;
+			outline: none;
+			transition: all ease-in-out 0.2s;
+			-moz-appearance: none; /* Firefox */
+			-webkit-appearance: none; /* Safari and Chrome */
+			appearance: none;
+		}
+		.select-arrow {
+			position: absolute;
+			top: 35%;
+			right: 15%;
+		}
+	}
+	.reset-btn {
+		display: flex;
+		align-items: center;
+		margin-left: 1rem;
+	}
+}
+
+.dark {
+	.searchInput {
+		color: vars.$white;
+		background-color: vars.$dark-mode-elem;
+		box-shadow: 1px 1px 3px -2px vars.$dark-mode-bg;
+		transition: all ease-in-out 0.2s;
+		input {
+			background-color: vars.$dark-mode-elem;
+			color: vars.$white;
+		}
+	}
+	.form-filter-container {
+		.form-filter {
+			color: vars.$white;
+			background-color: vars.$dark-mode-elem;
+			box-shadow: 1px 1px 3px -2px vars.$dark-mode-bg;
+			select {
+				background-color: inherit;
+				color: inherit;
+			}
+		}
+		.select-arrow {
+			color: vars.$white;
+		}
+	}
 }
 
 @media screen and (max-width: 700px) {
-    .form-container {
-        flex-direction: column;
-        .searchInput, .form-filter {
-            width: 80%;
-            margin: 0 auto;
-            margin: 1rem;
-        }
-    }
+	.form-container {
+		flex-direction: column;
+		.searchInput {
+			width: 85%;
+			input {
+				width: 80%;
+			}
+		}
+		.form-filter-container {
+			width: 75vw;
+			.select-arrow {
+				top: 40%;
+				right: 45%;
+			}
+			.searchInput,
+			.form-filter {
+				width: 65%;
+				justify-self: flex-start;
+				margin: 1rem;
+				margin-left: 0;
+			}
+		}
+	}
 }

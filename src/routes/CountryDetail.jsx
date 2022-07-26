@@ -1,50 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getCountriesByName } from '../services/Requests';
-import Header from './Header';
+import { useParams, Link } from 'react-router-dom';
+import { useFetch } from '../hooks/useFetch';
 import '../styles/CountryDetails.scss';
 
 export default function CountryDetail() {
-	const [country, setCountry] = useState(null);
-	const params = useParams();
-
-	useEffect(() => {
-		getCountriesByName(setCountry, params.name);
-	}, [params.name]);
+	const { name } = useParams();
+	const { data, loading } = useFetch(
+		`https://restcountries.com/v3.1/name/${name}`,
+	);
 
 	let curr, langs, natName;
 
-	if (country !== null) {
+	if (loading === false) {
 		// ** Currencies **
-		curr =
-			country[0].currencies[
-				Object.getOwnPropertyNames(country[0].currencies)
-			];
+		curr = Array(Object.values(data[0].currencies));
 		// ** Languages **
-		langs = Object.values(country[0].languages);
+		langs = Object.values(data[0].languages);
 		// ** Native Name **
 		natName =
-			country[0].name.nativeName[
-				Object.keys(country[0].name.nativeName)[0]
-			].official;
+			data[0].name.nativeName[Object.keys(data[0].name.nativeName)[0]]
+				.official;
 	}
 	return (
 		<>
-			<Header />
-			{country !== null ? (
+			{loading === false ? (
 				<div className='main-container'>
-					<a className='back-btn' href='/'>
+					<Link className='back-btn' to='/'>
 						<i className='bi bi-arrow-left'></i>Back
-					</a>
+					</Link>
 					<div className='details-container'>
 						<div className='img-container'>
 							<img
-								src={country[0].flags.svg}
-								alt={`Flag of ${country[0].name.common}`}
+								src={data[0].flags.svg}
+								alt={`Flag of ${data[0].name.common}`}
 							/>
 						</div>
 						<div>
-							<h2>{country[0].name.common}</h2>
+							<h2>{data[0].name.common}</h2>
 							<div className='details-description'>
 								<div className='desc-left'>
 									<p>
@@ -53,29 +44,31 @@ export default function CountryDetail() {
 									</p>
 									<p>
 										<span>Population: </span>
-										{country[0].population}
+										{data[0].population.toLocaleString()}
 									</p>
 									<p>
 										<span>Region: </span>
-										{country[0].region}
+										{data[0].region}
 									</p>
 									<p>
 										<span>Sub Region: </span>
-										{country[0].subregion}
+										{data[0].subregion}
 									</p>
 									<p>
 										<span>Capital: </span>
-										{country[0].capital}
+										{data[0].capital}
 									</p>
 								</div>
 								<div className='desc-right'>
 									<p>
 										<span>Top Level Domain: </span>
-										{country[0].tld}
+										{data[0].tld}
 									</p>
 									<p>
 										<span>Currencies: </span>
-										{curr.name}
+										{Object.values(
+											curr[0].map((c) => c.name),
+										).join(', ')}
 									</p>
 									<p>
 										<span>Languages: </span>
@@ -84,9 +77,11 @@ export default function CountryDetail() {
 								</div>
 							</div>
 							<div className='borders'>
-								Border Countries:{' '}
-								{country[0].borders ? (
-									country[0].borders.map((border) => (
+								<span className='borders-span'>
+									Border Countries:{' '}
+								</span>{' '}
+								{data[0].borders ? (
+									data[0].borders.map((border) => (
 										<div
 											key={border}
 											className='border-div'

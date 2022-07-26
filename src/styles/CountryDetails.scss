@@ -1,29 +1,21 @@
-$darkModeElem: hsl(209, 23%, 22%);
-$darkModeBg: hsl(207, 26%, 17%);
-$lightModeTxt: hsl(200, 15%, 8%);
-$lightModeInput: hsl(0, 0%, 52%);
-$lightModeBg: hsl(0, 0%, 98%);
-$white: hsl(0, 0%, 100%);
-
-* {
-	box-sizing: border-box;
-	font-family: 'Nunito Sans', sans-serif;
-}
+@use './utils/_vars';
+@use './utils/_mixins';
 
 body {
-	background-color: $lightModeBg;
-	color: $lightModeTxt;
-	min-height: 100vh;
+	margin: 0;
 }
 
+.container {
+	height: 100%;
+}
 .main-container {
+	@include mixins.flexible(flex, column, nowrap, space-between, center);
 	position: relative;
-	display: flex;
-	flex-direction: column;
+	top: 5rem;
 	gap: 1rem;
 	margin: 0 auto;
-	width: 80vw;
-	min-height: 80vh;
+	width: 90vw;
+	height: 100vh;
 	.back-btn {
 		position: absolute;
 		top: 7vh;
@@ -31,10 +23,9 @@ body {
 		padding: 0.5rem 2rem;
 		width: 150px;
 		font-weight: 600;
-		background-color: $white;
 		border: none;
 		border-radius: 5px;
-		box-shadow: 0px 0px 5px 1px $lightModeInput;
+		transition: all ease-in-out 0.2s;
 		cursor: pointer;
 		i {
 			margin-right: 1rem;
@@ -47,9 +38,7 @@ body {
 .details-container {
 	position: absolute;
 	top: 22vh;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+	@include mixins.flexible(flex, row, wrap, space-around, center);
 	h2,
 	div {
 		margin-top: 0;
@@ -57,7 +46,7 @@ body {
 	}
 	.img-container {
 		align-self: baseline;
-		width: 40%;
+		width: 30%;
 		img {
 			max-width: 100%;
 		}
@@ -76,8 +65,7 @@ body {
 		}
 	}
 	.borders {
-		display: flex;
-		align-items: center;
+		@include mixins.flexible(flex, row, wrap, flex-start, center);
 		font-size: 14px;
 		font-weight: 600;
 		.border-div:first-of-type {
@@ -90,9 +78,68 @@ body {
 			line-height: 1.5rem;
 			text-align: center;
 			border-radius: 3px;
-			box-shadow: 0px 0px 5px -1px $lightModeInput;
 			p {
 				margin: 0;
+			}
+		}
+	}
+}
+
+.light {
+	background-color: vars.$light-mode-bg;
+	color: vars.$light-mode-txt;
+	.main-container {
+		.back-btn {
+			background-color: vars.$white;
+			box-shadow: 0px 0px 5px -1px vars.$light-mode-input;
+		}
+	}
+	.details-container {
+		.border-div {
+			background-color: vars.$light-mode-bg;
+			box-shadow: 0px 0px 5px -1px vars.$light-mode-input;
+		}
+	}
+}
+
+.dark {
+	color: vars.$white;
+	background-color: vars.$dark-mode-bg;
+	.main-container {
+		.back-btn {
+			background-color: vars.$dark-mode-elem;
+			box-shadow: 0px 0px 5px -1px vars.$light-mode-txt;
+		}
+	}
+	.details-container {
+		.border-div {
+			background-color: vars.$dark-mode-elem;
+			box-shadow: 0px 0px 5px -1px vars.$light-mode-txt;
+		}
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.dark,
+	.light,
+	.main-container {
+		min-height: 100%;
+	}
+	.main-container {
+		.back-btn {
+			left: 0;
+		}
+	}
+	.details-container {
+		justify-content: left;
+		.img-container {
+			width: 100%;
+			margin-bottom: 1rem;
+		}
+		.details-description {
+			flex-direction: column;
+			.borders {
+				flex-wrap: wrap;
 			}
 		}
 	}

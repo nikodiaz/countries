@@ -1,0 +1,28 @@
+@use './utils/_vars';
+@use './utils/_mixins';
+* {
+	box-sizing: border-box;
+	font-family: 'Nunito Sans', sans-serif;
+}
+
+.container {
+	min-height: 100vh;
+	padding-bottom: 5rem;
+}
+
+.light {
+	background-color: vars.$light-mode-bg;
+	color: vars.$light-mode-txt;
+	transition: all ease-in-out 0.2s;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.dark {
+	background-color: vars.$dark-mode-bg;
+	color: vars.$dark-mode-elem;
+	transition: all ease-in-out 0.2s;
+}

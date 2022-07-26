@@ -1,41 +1,58 @@
-$darkModeElem: hsl(209, 23%, 22%);
-$darkModeBg: hsl(207, 26%, 17%);
-$lightModeTxt: hsl(200, 15%, 8%);
-$lightModeInput: hsl(0, 0%, 52%);
-$lightModeBg: hsl(0, 0%, 98%);
-$white: hsl(0, 0%, 100%);
+@use './utils/_vars';
+@use './utils/_mixins';
 
-* {
-	box-sizing: border-box;
-	font-family: 'Nunito Sans', sans-serif;
+.light {
+	transition: all ease-in-out 0.2s;
+	.header {
+		color: vars.$light-mode-txt;
+		background-color: vars.$light-mode-bg;
+		box-shadow: 1px 1px 5px -1px vars.$light-mode-input;
+	}
 }
-
-body {
-	background-color: $lightModeBg;
-	color: $lightModeTxt;
-}
-
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
 .header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	@include mixins.flexible(flex, row, nowrap, space-between, center);
 	height: 80px;
 	padding: 0 3rem;
-	box-shadow: 1px 1px 5px -1px $lightModeInput;
+	z-index: 9;
+	transition: all ease-in-out 0.2s;
 	h2 {
 		font-size: 24px;
 		font-weight: 800;
 	}
-	p {
-		font-weight: 600;
+	button {
+		font-size: 16px;
+		font-weight: 500;
+		background-color: inherit;
+		border: none;
 		cursor: pointer;
 		span {
 			margin-right: 0.5rem;
+		}
+	}
+}
+
+.dark {
+	.header {
+		color: vars.$white;
+		background-color: vars.$dark-mode-elem;
+		box-shadow: 1px 1px 5px -1px vars.$dark-mode-bg;
+		button {
+			color: inherit;
+		}
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.header {
+		padding: 0 1rem;
+		h2 {
+			font-size: 18px;
+		}
+		button {
+			font-size: 14px;
 		}
 	}
 }

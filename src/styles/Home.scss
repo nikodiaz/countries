@@ -1,48 +1,38 @@
-$darkModeElem: hsl(209, 23%, 22%);
-$darkModeBg: hsl(207, 26%, 17%);
-$lightModeTxt: hsl(200, 15%, 8%);
-$lightModeInput: hsl(0, 0%, 52%);
-$lightModeBg: hsl(0, 0%, 98%);
-$white: hsl(0, 0%, 100%);
-
-* {
-	box-sizing: border-box;
-	font-family: 'Nunito Sans', sans-serif;
-}
+@use './utils/_vars';
+@use './utils/_mixins';
 
 body {
-	background-color: $lightModeBg;
-	color: $lightModeTxt;
+	height: 100%;
 }
-
-a {
-	text-decoration: none;
-	color: inherit;
+.light {
+	min-height: 100vh;
+	color: vars.$light-mode-txt;
+	background-color: vars.$light-mode-bg;
+	.countries-container {
+		color: inherit;
+		background-color: inherit;
+	}
 }
-
 .countries-container {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	@include mixins.grid(grid, 4, 2rem);
+	width: 90vw;
 	justify-items: center;
-	gap: 3rem;
-	margin: 0 6rem;
+	place-self: center;
+	margin: 0 auto;
 	margin-top: 2rem;
-}
-
-@media screen and (max-width: 1250px) {
-	.countries-container {
-		grid-template-columns: repeat(3, 1fr);
+	h1 {
+		grid-column: 1/4;
 	}
 }
 
-@media screen and (max-width: 950px) {
-	.countries-container {
-		grid-template-columns: repeat(2, 1fr);
-	}
+.dark {
+	background-color: vars.$dark-mode-bg;
+	color: vars.$white;
 }
 
-@media screen and (max-width: 600px) {
-	.countries-container {
-		grid-template-columns: 1fr;
+@media screen and(max-width: 400px) {
+	.dark,
+	.light {
+		height: 100%;
 	}
 }
