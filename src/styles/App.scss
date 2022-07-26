@@ -8,12 +8,14 @@
 .container {
 	min-height: 100vh;
 	padding-bottom: 5rem;
+	color: vars.$light-mode-txt;
+	background-color: vars.$light-mode-bg;
+	transition: all ease-in-out 0.2s;
 }
 
 .light {
 	background-color: vars.$light-mode-bg;
 	color: vars.$light-mode-txt;
-	transition: all ease-in-out 0.2s;
 }
 
 a {
@@ -22,7 +24,8 @@ a {
 }
 
 .dark {
-	background-color: vars.$dark-mode-bg;
-	color: vars.$dark-mode-elem;
-	transition: all ease-in-out 0.2s;
+	.container {
+		background-color: vars.$dark-mode-bg;
+		color: vars.$dark-mode-elem;
+	}
 }

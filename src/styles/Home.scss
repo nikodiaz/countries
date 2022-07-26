@@ -8,10 +8,6 @@ body {
 	min-height: 100vh;
 	color: vars.$light-mode-txt;
 	background-color: vars.$light-mode-bg;
-	.countries-container {
-		color: inherit;
-		background-color: inherit;
-	}
 }
 .countries-container {
 	@include mixins.grid(grid, 4, 2rem);
