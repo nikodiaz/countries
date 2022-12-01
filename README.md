@@ -1,4 +1,6 @@
-[![Image of the project](https://github.com/nikodiaz/Portfolio/blob/main/img/port1.png)](https://ndcountries.netlify.app/)
+<a href='https://ndcountries.netlify.app/' target='_blank'>
+    <img src='https://github.com/nikodiaz/Portfolio/blob/main/img/port1.png' alt='Image of the project'/>
+</a>
 
 👆👆👆 Click on the image to see the project live.
 
